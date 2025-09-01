@@ -14,7 +14,8 @@ public class CorsConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/**")
-                .allowedOriginPatterns("http://localhost:*")
+                // .allowedOriginPatterns("http://localhost:*")
+                .allowedOriginPatterns("https://chant-counter.netlify.app")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
                 .allowCredentials(true);
@@ -23,7 +24,13 @@ public class CorsConfig implements WebMvcConfigurer {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.addAllowedOriginPattern("http://localhost:*");
+        
+        // For Development:
+        // configuration.addAllowedOriginPattern("http://localhost:*");
+        
+        // For Testing/Production
+        configuration.addAllowedOriginPattern("https://chant-counter.netlify.app");
+        
         configuration.addAllowedMethod("*");
         configuration.addAllowedHeader("*");
         configuration.setAllowCredentials(true);

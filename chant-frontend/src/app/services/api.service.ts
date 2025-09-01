@@ -31,7 +31,11 @@ export interface TotalChantsResponse {
   providedIn: 'root'
 })
 export class ApiService {
-  private baseUrl = 'http://localhost:8080/api';
+  // For Development:
+  // private baseUrl = 'http://localhost:8080/api';
+
+  // For Testing/Production:
+  private baseUrl = 'https://chant-counter.onrender.com/api';
 
   constructor(private http: HttpClient) { }
 

@@ -85,6 +85,10 @@
 
 <build>
     <plugins>
+        <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+        </plugin>
       <!-- Ensure Java 8 bytecode -->
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>

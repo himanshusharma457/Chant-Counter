@@ -11,7 +11,8 @@
 	<groupId>com.avics</groupId>
 	<artifactId>chant</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<!-- <packaging>war</packaging> -->
+	<packaging>jar</packaging>
 	<name>chant</name>
 	<description>chant count </description>
 	<url/>

@@ -1,0 +1,236 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+html, body { 
+  height: 100%; 
+  margin: 0;
+  padding: 0;
+}
+
+body { 
+  font-family: 'Inter', 'Roboto', "Helvetica Neue", sans-serif;
+  background: #f8fafc;
+  color: #2d3748;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Material Theme Colors */
+.mdc-button--raised.mat-primary {
+  background: linear-gradient(45deg, #3f51b5, #e91e63) !important;
+  color: white !important;
+  box-shadow: 0 4px 14px 0 rgba(63, 81, 181, 0.39) !important;
+}
+
+/* Enhanced Material Form Fields */
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  color: rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
+}
+
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: #3f51b5;
+  border-width: 2px;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline-start,
+.mat-form-field-appearance-outline .mat-form-field-outline-end {
+  border-radius: 8px;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline-gap {
+  border-radius: 0;
+}
+
+/* Enhanced Button Styles */
+.mat-raised-button {
+  border-radius: 8px;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+.mat-raised-button:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Card Enhancements */
+.mat-card {
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: none;
+}
+
+/* Tab Enhancements */
+.mat-tab-group.mat-primary .mat-ink-bar {
+  background-color: #3f51b5;
+  height: 3px;
+  border-radius: 3px;
+}
+
+.mat-tab-label {
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: none;
+}
+
+.mat-tab-label.mat-tab-label-active {
+  opacity: 1;
+  color: #3f51b5;
+  font-weight: 600;
+}
+
+.mat-tab-header {
+  border-bottom: 1px solid #e2e8f0;
+}
+
+/* Snackbar Enhancements */
+.mat-snack-bar-container {
+  max-width: 500px;
+  min-width: 300px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+:root {
+  --primary-color: #3f51b5;
+  --accent-color: #e91e63;
+  --success-color: #4caf50;
+  --error-color: #f44336;
+  --warning-color: #ff9800;
+  --info-color: #2196f3;
+}
+
+/* Custom Snackbar Classes */
+.success-snackbar {
+  background-color: var(--success-color) !important;
+  color: white !important;
+}
+
+.error-snackbar {
+  background-color: var(--error-color) !important;
+  color: white !important;
+}
+
+.warning-snackbar {
+  background-color: var(--warning-color) !important;
+  color: white !important;
+}
+
+.info-snackbar {
+  background-color: var(--info-color) !important;
+  color: white !important;
+}
+
+/* Icon Improvements */
+.mat-icon {
+  font-feature-settings: 'liga';
+  vertical-align: middle;
+}
+
+/* Datepicker Enhancements */
+.mat-datepicker-popup {
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.mat-calendar-header {
+  background-color: #1976d2;
+  color: white;
+}
+
+.mat-calendar-body-selected {
+  background-color: #1976d2;
+  color: white;
+}
+
+/* Spinner Customization */
+.mat-progress-spinner circle {
+  stroke: #1976d2;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Selection Styling */
+::selection {
+  background-color: rgba(25, 118, 210, 0.2);
+  color: #1976d2;
+}
+
+/* Focus Styles */
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-wrapper {
+  transform: scale(1.02);
+  transition: transform 0.2s ease;
+}
+
+/* Animation Classes */
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide-up {
+  animation: slideUp 0.4s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Accessibility Enhancements */
+.mat-button:focus,
+.mat-raised-button:focus,
+.mat-fab:focus,
+.mat-mini-fab:focus {
+  outline: 2px solid #1976d2;
+  outline-offset: 2px;
+}
+
+/* Print Styles */
+@media print {
+  .mat-toolbar,
+  .action-section {
+    display: none !important;
+  }
+  
+  .main-card {
+    box-shadow: none !important;
+    border: 1px solid #ddd !important;
+  }
+}

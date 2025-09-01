@@ -1,0 +1,174 @@
+<div class="app-container">
+  <!-- Professional Header -->
+  <div class="hero-section">
+    <div class="hero-content">
+      <!-- <h1 class="hero-title">Chant Counter</h1> -->
+      <h1 class="hero-title">Om Namah Shivaya 🙏</h1>
+      <p class="hero-subtitle">Track your spiritual journey with precision and purpose</p>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="content-wrapper">
+    <!-- Statistics Section -->
+    <div class="stats-container" *ngIf="userStats || totalStats" [@fadeIn]>
+      <div class="stats-grid">
+        <mat-card class="stat-card personal-stats" *ngIf="userStats" elevation="4">
+          <mat-card-content class="stat-content">
+            <div class="stat-icon-wrapper personal">
+              <mat-icon class="stat-icon">person</mat-icon>
+            </div>
+            <div class="stat-details">
+              <h3 class="stat-label">Your Total</h3>
+              <p class="stat-number">{{ userStats.totalCount | number }}</p>
+              <p class="stat-sublabel">Total Chants</p>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="stat-card community-stats" *ngIf="totalStats" elevation="4">
+          <mat-card-content class="stat-content">
+            <div class="stat-icon-wrapper community">
+              <mat-icon class="stat-icon">groups</mat-icon>
+            </div>
+            <div class="stat-details">
+              <h3 class="stat-label">Community Total</h3>
+              <p class="stat-number">{{ totalStats.totalChants | number }}</p>
+              <p class="stat-sublabel">All Practitioners</p>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+
+    <mat-card class="main-card" elevation="8" [@slideIn]>
+      <form [formGroup]="chantForm" (ngSubmit)="submitChant()">
+        
+        <!-- User Identification Section -->
+        <div class="form-section">
+          <div class="section-header">
+            <mat-icon class="section-icon">person</mat-icon>
+            <h2 class="section-title">User Identification</h2>
+          </div>
+          <p class="section-description">Choose your preferred identification method</p>
+          
+          <mat-tab-group [(selectedIndex)]="selectedTab" 
+                         (selectedTabChange)="onTabChange($event)"
+                         class="professional-tabs"
+                         backgroundColor="primary">
+            <mat-tab>
+              <ng-template mat-tab-label>
+                <mat-icon class="tab-icon">phone</mat-icon>
+                Phone Number
+              </ng-template>
+              <div class="tab-content">
+                <mat-form-field appearance="outline" class="full-width professional-field">
+                  <mat-label>Mobile Number</mat-label>
+                  <mat-icon matPrefix>phone</mat-icon>
+                  <input matInput 
+                         formControlName="phoneNumber" 
+                         placeholder="Enter 10-digit mobile number"
+                         maxlength="10"
+                         pattern="[0-9]*"
+                         type="tel">
+                  <mat-hint>Your mobile number will be used as your unique identifier</mat-hint>
+                  <mat-error *ngIf="chantForm.get('phoneNumber')?.hasError('required')">
+                    Mobile number is required
+                  </mat-error>
+                  <mat-error *ngIf="chantForm.get('phoneNumber')?.hasError('pattern')">
+                    Please enter a valid 10-digit mobile number
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </mat-tab>
+            
+            <mat-tab>
+              <ng-template mat-tab-label>
+                <mat-icon class="tab-icon">badge</mat-icon>
+                User ID
+              </ng-template>
+              <div class="tab-content">
+                <mat-form-field appearance="outline" class="full-width professional-field">
+                  <mat-label>User ID</mat-label>
+                  <mat-icon matPrefix>account_circle</mat-icon>
+                  <input matInput 
+                         formControlName="customUserId" 
+                         placeholder="Create your unique user ID">
+                  <mat-hint>Minimum 8 characters, letters and numbers allowed</mat-hint>
+                  <mat-error *ngIf="chantForm.get('customUserId')?.hasError('required')">
+                    User ID is required
+                  </mat-error>
+                  <mat-error *ngIf="chantForm.get('customUserId')?.hasError('minlength')">
+                    User ID must be at least 8 characters long
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+
+        <!-- Chant Count Section -->
+        <div class="form-section">
+          <div class="section-header">
+            <mat-icon class="section-icon">format_list_numbered</mat-icon>
+            <h2 class="section-title">Chant Count</h2>
+          </div>
+          <p class="section-description">Record your spiritual practice</p>
+          
+          <mat-form-field appearance="outline" class="full-width professional-field">
+            <mat-label>Number of Chants</mat-label>
+            <mat-icon matPrefix>add_circle</mat-icon>
+            <input matInput 
+                   type="number" 
+                   formControlName="count" 
+                   placeholder="Enter count"
+                   min="1">
+            <mat-hint>Enter the number of chants completed</mat-hint>
+            <mat-error *ngIf="chantForm.get('count')?.hasError('required')">
+              Chant count is required
+            </mat-error>
+            <mat-error *ngIf="chantForm.get('count')?.hasError('min')">
+              Count must be at least 1
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- Date Selection Section -->
+        <div class="form-section">
+          <div class="section-header">
+            <mat-icon class="section-icon">event</mat-icon>
+            <h2 class="section-title">Date Selection</h2>
+          </div>
+          <p class="section-description">Specify the date for this entry (defaults to today)</p>
+          
+          <mat-form-field appearance="outline" class="full-width professional-field">
+            <mat-label>Date</mat-label>
+            <mat-icon matPrefix>calendar_today</mat-icon>
+            <input matInput 
+                   [matDatepicker]="picker" 
+                   formControlName="date"
+                   placeholder="Select date (optional)">
+            <mat-datepicker-toggle matSuffix [for]="picker">
+              <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+            </mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-hint>Leave empty to use today's date</mat-hint>
+          </mat-form-field>
+        </div>
+
+        <!-- Action Button -->
+        <div class="action-section">
+          <button mat-raised-button 
+                  color="primary" 
+                  type="submit" 
+                  [disabled]="chantForm.invalid || isLoading"
+                  class="submit-button">
+            <mat-icon *ngIf="!isLoading">save</mat-icon>
+            <mat-spinner *ngIf="isLoading" diameter="20"></mat-spinner>
+            <span class="button-text">{{ isLoading ? 'Saving...' : 'Save' }}</span>
+          </button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+</div>

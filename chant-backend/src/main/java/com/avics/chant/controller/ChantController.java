@@ -5,6 +5,8 @@ import com.avics.chant.service.ChantService;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +19,7 @@ public class ChantController {
     private ChantService chantService;
 
     @PostMapping("/add")
-    public ResponseEntity<ApiResponse> addChant(@RequestBody AddChantRequest request){
+    public ResponseEntity<ApiResponse> addChant(@Valid @RequestBody AddChantRequest request){
         return ResponseEntity.ok(chantService.addChant(request));
     }
 

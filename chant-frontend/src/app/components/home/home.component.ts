@@ -40,13 +40,36 @@ export class HomeComponent implements OnInit {
       phoneNumber: ['', [Validators.pattern(/^\d{10}$/)]],
       customUserId: ['', [Validators.minLength(8)]],
       count: ['', [Validators.required, Validators.min(1)]],
-      date: [''] // Optional date
+      date: ['', [this.futureDateValidator.bind(this)]] // Add future date validation
     });
   }
 
   ngOnInit(): void {
     this.updateValidators();
     this.loadTotalStats();
+  }
+
+  // Custom validator to prevent future dates
+  futureDateValidator(control: any) {
+    if (!control.value) {
+      return null; // Allow empty values since date is optional
+    }
+    
+    const selectedDate = new Date(control.value);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Reset time to start of day for accurate comparison
+    selectedDate.setHours(0, 0, 0, 0);
+    
+    if (selectedDate > today) {
+      return { futureDate: true };
+    }
+    
+    return null;
+  }
+
+  // Function to get the maximum selectable date (today)
+  getMaxDate(): Date {
+    return new Date();
   }
 
   onTabChange(event: MatTabChangeEvent): void {

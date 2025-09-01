@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,6 +40,18 @@ public class ChantServiceImpl implements ChantService {
     public ApiResponse addChant(AddChantRequest request) {
         try {
             String userId = validationUtil.normalizeUserId(request.getUserid());
+            
+            // Validate date is not in the future
+            LocalDate chantDate = request.getDate();
+            if (chantDate != null && chantDate.isAfter(LocalDate.now())) {
+                return new ApiResponse(false, "Cannot add chant count for future dates", null);
+            }
+            
+            // If no date provided, use current date
+            if (chantDate == null) {
+                chantDate = LocalDate.now();
+            }
+            
             Optional<com.avics.chant.entity.User> userOpt = userService.findUser(userId);
 
             if(!userOpt.isPresent()) {
@@ -55,12 +68,12 @@ public class ChantServiceImpl implements ChantService {
 
             Chant chant = new Chant();
             chant.setUserIdentifier(userId);
-            chant.setChantDate(request.getDate());
+            chant.setChantDate(chantDate);
             chant.setChantCount(request.getCount());
             chantRepository.save(chant);
 
             Long total = chantRepository.getUserTotal(userId);
-            log.info("Chant added for {} with count {}. Total={}", userId, request.getCount(), total);
+            log.info("Chant added for {} with count {} on date {}. Total={}", userId, request.getCount(), chantDate, total);
 
             return new ApiResponse(true, chantAddedMsg, new UserTotalResponse(userId, total));
 

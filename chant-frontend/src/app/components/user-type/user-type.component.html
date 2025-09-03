@@ -1,0 +1,107 @@
+<div class="user-type-container">
+  <!-- Professional Header -->
+  <div class="hero-section">
+    <div class="hero-content">
+      <h1 class="hero-title">Om Namah Shivaya 🙏</h1>
+      <p class="hero-subtitle">Username Account Setup</p>
+      <p class="welcome-message">Great choice! Now let's set up your username-based account.</p>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="content-wrapper">
+    <mat-card class="main-card" elevation="8" [@slideIn]>
+      <div class="card-header">
+        <mat-icon class="header-icon">account_circle</mat-icon>
+        <h2 class="card-title">Account Setup</h2>
+        <p class="card-subtitle">Choose the option that best describes your situation</p>
+      </div>
+
+      <div class="options-container">
+        <!-- Existing User Option -->
+        <mat-card class="option-card existing-user-option" 
+                  elevation="4" 
+                  (click)="selectExistingUser()"
+                  [class.selected]="selectedOption === 'existing'"
+                  [@fadeIn]>
+          <mat-card-content class="option-content">
+            <div class="option-icon-wrapper existing">
+              <mat-icon class="option-icon">login</mat-icon>
+            </div>
+            <div class="option-details">
+              <h3 class="option-title">Existing User</h3>
+              <p class="option-description">
+                I have already created my username. Take me to add my count.
+                Continue with your existing spiritual journey tracking.
+              </p>
+              <div class="option-benefits">
+                <div class="benefit-item">
+                  <mat-icon class="benefit-icon">check_circle</mat-icon>
+                  <span>Quick access</span>
+                </div>
+                <div class="benefit-item">
+                  <mat-icon class="benefit-icon">check_circle</mat-icon>
+                  <span>Continue your journey</span>
+                </div>
+              </div>
+            </div>
+            <mat-icon class="arrow-icon">arrow_forward</mat-icon>
+          </mat-card-content>
+        </mat-card>
+
+        <!-- New User Option -->
+        <mat-card class="option-card new-user-option" 
+                  elevation="4" 
+                  (click)="selectNewUser()"
+                  [class.selected]="selectedOption === 'new'"
+                  [@fadeIn]>
+          <mat-card-content class="option-content">
+            <div class="option-icon-wrapper new">
+              <mat-icon class="option-icon">person_add</mat-icon>
+            </div>
+            <div class="option-details">
+              <h3 class="option-title">New User</h3>
+              <p class="option-description">
+                I am a first-time user. Let's create a new UserID.
+                Start your spiritual journey with a personalized username.
+              </p>
+              <div class="option-benefits">
+                <div class="benefit-item">
+                  <mat-icon class="benefit-icon">check_circle</mat-icon>
+                  <span>Create new identity</span>
+                </div>
+                <div class="benefit-item">
+                  <mat-icon class="benefit-icon">check_circle</mat-icon>
+                  <span>Fresh start</span>
+                </div>
+              </div>
+            </div>
+            <mat-icon class="arrow-icon">arrow_forward</mat-icon>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <!-- Navigation Buttons -->
+      <div class="action-section">
+        <button mat-stroked-button 
+                color="primary" 
+                (click)="goBack()"
+                class="back-button">
+          <mat-icon>arrow_back</mat-icon>
+          <span>Back to Options</span>
+        </button>
+
+        <button mat-raised-button 
+                color="primary" 
+                (click)="continueWithSelection()"
+                [disabled]="!selectedOption"
+                class="continue-button"
+                *ngIf="selectedOption"
+                [@fadeIn]>
+          <mat-icon>arrow_forward</mat-icon>
+          <span>Continue as {{ selectedOption === 'existing' ? 'Existing' : 'New' }} User</span>
+        </button>
+      </div>
+    </mat-card>
+  </div>
+</div>

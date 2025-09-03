@@ -39,16 +39,34 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
+  private normalizeUserId(userId: string): string {
+    // Check if it's a phone number (10 digits)
+    if (/^\d{10}$/.test(userId)) {
+      return userId; // Keep phone numbers as-is
+    }
+    // For usernames, convert to uppercase to match backend normalization
+    return userId.toUpperCase();
+  }
+
   createUser(request: CreateUserRequest): Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(`${this.baseUrl}/users/create`, request);
+    const normalizedRequest = {
+      ...request,
+      userid: this.normalizeUserId(request.userid)
+    };
+    return this.http.post<ApiResponse>(`${this.baseUrl}/users/create`, normalizedRequest);
   }
 
   addChant(request: AddChantRequest): Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(`${this.baseUrl}/chants/add`, request);
+    const normalizedRequest = {
+      ...request,
+      userid: this.normalizeUserId(request.userid)
+    };
+    return this.http.post<ApiResponse>(`${this.baseUrl}/chants/add`, normalizedRequest);
   }
 
   getUserTotal(userId: string): Observable<UserTotalResponse> {
-    return this.http.get<UserTotalResponse>(`${this.baseUrl}/chants/user/${userId}/total`);
+    const normalizedUserId = this.normalizeUserId(userId);
+    return this.http.get<UserTotalResponse>(`${this.baseUrl}/chants/user/${normalizedUserId}/total`);
   }
 
   getTotalChants(): Observable<TotalChantsResponse> {

@@ -14,8 +14,12 @@ public class CorsConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/**")
+                // For Development:
                 // .allowedOriginPatterns("http://localhost:*")
+                
+                // For Testing/Production:
                 .allowedOriginPatterns("https://chant-counter.netlify.app")
+                
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
                 .allowCredentials(true);

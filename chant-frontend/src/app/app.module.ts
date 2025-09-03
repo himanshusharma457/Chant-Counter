@@ -22,11 +22,17 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRippleModule } from '@angular/material/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { HomeComponent } from './components/home/home.component';
+import { LandingComponent } from './components/landing/landing.component';
+import { UserTypeComponent } from './components/user-type/user-type.component';
+import { AddChantComponent } from './components/add-chant/add-chant.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    LandingComponent,
+    UserTypeComponent,
+    AddChantComponent
   ],
   imports: [
     BrowserModule,

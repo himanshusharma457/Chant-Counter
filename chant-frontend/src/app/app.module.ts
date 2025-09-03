@@ -21,10 +21,12 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRippleModule } from '@angular/material/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDialogModule } from '@angular/material/dialog';
 import { HomeComponent } from './components/home/home.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { UserTypeComponent } from './components/user-type/user-type.component';
 import { AddChantComponent } from './components/add-chant/add-chant.component';
+import { DuplicateUsernameDialogComponent } from './components/duplicate-username-dialog/duplicate-username-dialog.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { AddChantComponent } from './components/add-chant/add-chant.component';
     HomeComponent,
     LandingComponent,
     UserTypeComponent,
-    AddChantComponent
+    AddChantComponent,
+    DuplicateUsernameDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +56,8 @@ import { AddChantComponent } from './components/add-chant/add-chant.component';
     MatTabsModule,
     MatProgressSpinnerModule,
     MatRippleModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

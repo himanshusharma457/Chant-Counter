@@ -71,12 +71,26 @@
                 Please enter a valid 10-digit mobile number
               </mat-error>
             </mat-form-field>
+            
+            <!-- For phone users, add a button to verify phone number and load stats -->
+            <div *ngIf="!userStats && chantForm.get('phoneNumber')?.value?.length === 10 && chantForm.get('phoneNumber')?.valid" class="verify-section">
+              <button mat-stroked-button 
+                      type="button"
+                      color="primary" 
+                      (click)="verifyPhoneNumber()"
+                      [disabled]="isVerifying"
+                      class="verify-button">
+                <mat-icon *ngIf="!isVerifying">search</mat-icon>
+                <mat-spinner *ngIf="isVerifying" diameter="20"></mat-spinner>
+                <span>{{ isVerifying ? 'Verifying...' : 'Check My Total Count' }}</span>
+              </button>
+            </div>
           </div>
 
           <!-- Username Input -->
           <div *ngIf="mode === 'username'" class="input-container">
-            <!-- Show mode change indicator -->
-            <div *ngIf="userType === 'existing' && existingUsername" class="mode-change-indicator">
+            <!-- Show mode change indicator only when user actually switched -->
+            <div *ngIf="switchedToExistingMode" class="mode-change-indicator">
               <mat-icon class="mode-icon">info</mat-icon>
               <span class="mode-text">Switched to existing user mode</span>
             </div>

@@ -22,7 +22,6 @@
         <mat-card class="option-card phone-option" 
                   elevation="4" 
                   (click)="selectPhoneOption()"
-                  [class.selected]="selectedOption === 'phone'"
                   [@fadeIn]>
           <mat-card-content class="option-content">
             <div class="option-icon-wrapper phone">
@@ -53,7 +52,6 @@
         <mat-card class="option-card username-option" 
                   elevation="4" 
                   (click)="selectUsernameOption()"
-                  [class.selected]="selectedOption === 'username'"
                   [@fadeIn]>
           <mat-card-content class="option-content">
             <div class="option-icon-wrapper username">
@@ -79,18 +77,6 @@
             <mat-icon class="arrow-icon">arrow_forward</mat-icon>
           </mat-card-content>
         </mat-card>
-      </div>
-
-      <!-- Continue Button -->
-      <div class="action-section" *ngIf="selectedOption">
-        <button mat-raised-button 
-                color="primary" 
-                (click)="continueWithSelection()"
-                class="continue-button"
-                [@fadeIn]>
-          <mat-icon>arrow_forward</mat-icon>
-          <span>Continue with {{ selectedOption === 'phone' ? 'Phone Number' : 'Username' }}</span>
-        </button>
       </div>
     </mat-card>
   </div>

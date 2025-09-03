@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { DuplicateUsernameDialogComponent } from '../duplicate-username-dialog/duplicate-username-dialog.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { ApiService, ApiResponse, UserTotalResponse, TotalChantsResponse } from '../../services/api.service';
@@ -33,11 +35,13 @@ export class AddChantComponent implements OnInit {
   userStats: UserTotalResponse | null = null;
   totalStats: TotalChantsResponse | null = null;
   existingUsername: string | null = null;
+  switchedToExistingMode = false; // Flag to track if user switched from new to existing mode
 
   constructor(
     private fb: FormBuilder,
     private apiService: ApiService,
     private snackBar: MatSnackBar,
+    private dialog: MatDialog,
     private route: ActivatedRoute,
     private router: Router
   ) {
@@ -140,6 +144,14 @@ export class AddChantComponent implements OnInit {
 
     this.isVerifying = true;
     this.loadUserStats(username);
+  }
+
+  verifyPhoneNumber(): void {
+    const phoneNumber = this.chantForm.get('phoneNumber')?.value;
+    if (!phoneNumber || phoneNumber.length !== 10) return;
+
+    this.isVerifying = true;
+    this.loadUserStats(phoneNumber);
   }
 
   private getCurrentUserId(): string {
@@ -276,32 +288,36 @@ export class AddChantComponent implements OnInit {
   private handleExistingUsernameError(userId: string, chantRequest: any): void {
     this.isLoading = false;
     
-    // Show a dialog or snackbar with options
-    const snackBarRef = this.snackBar.open(
-      `Username '${userId}' already exists. Would you like to add chant count as an existing user?`,
-      'Yes, Continue',
-      {
-        duration: 10000, // 10 seconds
-        panelClass: 'info-snackbar'
-      }
-    );
-
-    snackBarRef.onAction().subscribe(() => {
-      // User clicked "Yes, Continue" - proceed as existing user
-      this.proceedAsExistingUser(userId, chantRequest);
+    // Show a dialog with both options
+    const dialogRef = this.dialog.open(DuplicateUsernameDialogComponent, {
+      width: '400px',
+      data: { username: userId }
     });
 
-    snackBarRef.afterDismissed().subscribe((info) => {
-      if (!info.dismissedByAction) {
-        // User didn't click the action button - show alternative message
-        this.showAlternativeOptionsMessage();
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'continue') {
+        // User clicked "Yes, Continue" - proceed as existing user
+        this.proceedAsExistingUser(userId, chantRequest);
+      } else if (result === 'create-new') {
+        // User clicked "No, Create new user" - clear form and show message
+        this.showMessage('Please enter a different username to create a new account.', 'error');
+        this.chantForm.patchValue({ customUserId: '' });
+        // Focus on the username field
+        setTimeout(() => {
+          const usernameField = document.querySelector('input[formControlName="customUserId"]') as HTMLInputElement;
+          if (usernameField) {
+            usernameField.focus();
+          }
+        }, 100);
       }
+      // If result is null/undefined, user clicked outside or pressed escape - do nothing
     });
   }
 
   private proceedAsExistingUser(userId: string, chantRequest: any): void {
     this.isLoading = true;
     this.userType = 'existing'; // Change the mode to existing user
+    this.switchedToExistingMode = true; // Set flag to show switch message
     
     // Update the form to reflect the change to existing user mode
     this.chantForm.get('customUserId')?.setValue(userId);
@@ -330,36 +346,30 @@ export class AddChantComponent implements OnInit {
     });
   }
 
-  private showAlternativeOptionsMessage(): void {
-    const snackBarRef = this.snackBar.open(
-      'You can go back and select "Existing User" option to continue with your username.',
-      'Go Back',
-      {
-        duration: 8000,
-        panelClass: 'info-snackbar'
-      }
-    );
-
-    snackBarRef.onAction().subscribe(() => {
-      // Navigate back to user type selection
-      this.router.navigate(['/user-type']);
-    });
-  }
-
   private loadUserStats(userId: string): void {
     this.apiService.getUserTotal(userId).subscribe({
       next: (stats: UserTotalResponse) => {
         this.userStats = stats;
         this.existingUsername = userId;
         this.isVerifying = false;
-        if (this.userType === 'existing') {
+        
+        // Show appropriate success message based on mode
+        if (this.mode === 'phone') {
+          this.showMessage(`Phone number verified! Your total count: ${stats.totalCount}`, 'success');
+        } else if (this.userType === 'existing') {
           this.showMessage('Username verified successfully!', 'success');
         }
       },
       error: (error) => {
         console.error('Error loading user stats:', error);
         this.isVerifying = false;
-        if (this.userType === 'existing') {
+        
+        // Show appropriate error message based on mode
+        if (this.mode === 'phone') {
+          this.showMessage('Phone number not found in our records. You can still add your first chant count.', 'error');
+          this.userStats = null;
+          this.existingUsername = null;
+        } else if (this.userType === 'existing') {
           this.showMessage('Username not found. Please check and try again.', 'error');
           this.userStats = null;
           this.existingUsername = null;

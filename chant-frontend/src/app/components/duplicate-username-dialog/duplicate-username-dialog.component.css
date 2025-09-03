@@ -1,0 +1,30 @@
+.dialog-content {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.warning-icon {
+  font-size: 48px;
+  height: 48px;
+  width: 48px;
+  color: #ff9800;
+  margin-bottom: 16px;
+}
+
+mat-dialog-content p {
+  margin: 8px 0;
+  font-size: 16px;
+}
+
+mat-dialog-content p:first-of-type {
+  margin-top: 16px;
+}
+
+mat-dialog-actions {
+  padding: 16px 24px 24px;
+  gap: 12px;
+}
+
+mat-dialog-actions button {
+  min-width: 120px;
+}

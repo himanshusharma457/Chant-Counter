@@ -22,26 +22,16 @@ import { trigger, transition, style, animate } from '@angular/animations';
   ]
 })
 export class UserTypeComponent {
-  selectedOption: 'existing' | 'new' | null = null;
-
   constructor(private router: Router) {}
 
   selectExistingUser(): void {
-    this.selectedOption = 'existing';
+    // Navigate directly to add chant page with existing username mode
+    this.router.navigate(['/add-chant'], { queryParams: { mode: 'username', userType: 'existing' } });
   }
 
   selectNewUser(): void {
-    this.selectedOption = 'new';
-  }
-
-  continueWithSelection(): void {
-    if (this.selectedOption === 'existing') {
-      // Navigate to add chant page with existing username mode
-      this.router.navigate(['/add-chant'], { queryParams: { mode: 'username', userType: 'existing' } });
-    } else if (this.selectedOption === 'new') {
-      // Navigate to add chant page with new username mode
-      this.router.navigate(['/add-chant'], { queryParams: { mode: 'username', userType: 'new' } });
-    }
+    // Navigate directly to add chant page with new username mode
+    this.router.navigate(['/add-chant'], { queryParams: { mode: 'username', userType: 'new' } });
   }
 
   goBack(): void {

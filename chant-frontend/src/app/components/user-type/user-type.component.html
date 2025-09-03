@@ -22,7 +22,6 @@
         <mat-card class="option-card existing-user-option" 
                   elevation="4" 
                   (click)="selectExistingUser()"
-                  [class.selected]="selectedOption === 'existing'"
                   [@fadeIn]>
           <mat-card-content class="option-content">
             <div class="option-icon-wrapper existing">
@@ -53,7 +52,6 @@
         <mat-card class="option-card new-user-option" 
                   elevation="4" 
                   (click)="selectNewUser()"
-                  [class.selected]="selectedOption === 'new'"
                   [@fadeIn]>
           <mat-card-content class="option-content">
             <div class="option-icon-wrapper new">
@@ -89,17 +87,6 @@
                 class="back-button">
           <mat-icon>arrow_back</mat-icon>
           <span>Back to Options</span>
-        </button>
-
-        <button mat-raised-button 
-                color="primary" 
-                (click)="continueWithSelection()"
-                [disabled]="!selectedOption"
-                class="continue-button"
-                *ngIf="selectedOption"
-                [@fadeIn]>
-          <mat-icon>arrow_forward</mat-icon>
-          <span>Continue as {{ selectedOption === 'existing' ? 'Existing' : 'New' }} User</span>
         </button>
       </div>
     </mat-card>

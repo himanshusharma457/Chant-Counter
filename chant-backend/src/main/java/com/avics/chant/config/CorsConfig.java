@@ -15,10 +15,10 @@ public class CorsConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/**")
                 // For Development:
-                .allowedOriginPatterns("http://localhost:*")
+                // .allowedOriginPatterns("http://localhost:*")
                 
                 // For Testing/Production:
-                // .allowedOriginPatterns("https://chant-counter.netlify.app")
+                .allowedOriginPatterns("https://chant-counter.netlify.app")
                 
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
@@ -30,10 +30,10 @@ public class CorsConfig implements WebMvcConfigurer {
         CorsConfiguration configuration = new CorsConfiguration();
         
         // For Development:
-        configuration.addAllowedOriginPattern("http://localhost:*");
+        // configuration.addAllowedOriginPattern("http://localhost:*");
         
         // For Testing/Production
-        // configuration.addAllowedOriginPattern("https://chant-counter.netlify.app");
+        configuration.addAllowedOriginPattern("https://chant-counter.netlify.app");
         
         configuration.addAllowedMethod("*");
         configuration.addAllowedHeader("*");

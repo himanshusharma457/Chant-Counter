@@ -1,0 +1,108 @@
+<div class="create-username-container">
+  <!-- Professional Header -->
+  <div class="hero-section">
+    <div class="hero-content">
+      <h1 class="hero-title">Om Namah Shivaya 🙏</h1>
+      <p class="hero-subtitle">Create Your Username</p>
+      <p class="welcome-message">Create a unique username for your spiritual journey</p>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="content-wrapper">
+    <mat-card class="main-card" elevation="8" [@slideIn]>
+      <div class="card-header">
+        <mat-icon class="header-icon">person_add</mat-icon>
+        <h2 class="card-title">Create Your Username</h2>
+        <p class="card-subtitle">Enter your desired username twice to confirm</p>
+      </div>
+
+      <!-- Username Creation Form -->
+      <form [formGroup]="usernameForm" (ngSubmit)="onSubmit()" class="username-form">
+        <div class="form-section">
+          <!-- Username Field -->
+          <div class="input-container">
+            <mat-form-field appearance="outline" class="full-width professional-field">
+              <mat-label>Username</mat-label>
+              <mat-icon matPrefix>account_circle</mat-icon>
+              <input matInput 
+                     formControlName="username" 
+                     placeholder="Enter your username"
+                     autocomplete="off">
+              <mat-hint>Minimum 8 characters, letters and numbers only</mat-hint>
+              <mat-error *ngIf="usernameForm.get('username')?.hasError('required')">
+                Username is required
+              </mat-error>
+              <mat-error *ngIf="usernameForm.get('username')?.hasError('minlength')">
+                Username must be at least 8 characters long
+              </mat-error>
+              <mat-error *ngIf="usernameForm.get('username')?.hasError('pattern')">
+                Username can only contain letters and numbers
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Confirm Username Field -->
+          <div class="input-container">
+            <mat-form-field appearance="outline" class="full-width professional-field">
+              <mat-label>Re-enter Username</mat-label>
+              <mat-icon matPrefix>verified_user</mat-icon>
+              <input matInput 
+                     formControlName="confirmUsername" 
+                     placeholder="Re-enter your username"
+                     autocomplete="off">
+              <mat-hint>Must match the username above</mat-hint>
+              <mat-error *ngIf="usernameForm.get('confirmUsername')?.hasError('required')">
+                Please confirm your username
+              </mat-error>
+              <mat-error *ngIf="usernameForm.get('confirmUsername')?.hasError('mismatch')">
+                Usernames do not match
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-section">
+          <button mat-stroked-button 
+                  type="button"
+                  color="primary" 
+                  (click)="goBack()"
+                  class="back-button"
+                  [disabled]="isLoading">
+            <mat-icon>arrow_back</mat-icon>
+            <span>Back</span>
+          </button>
+
+          <button mat-raised-button 
+                  type="submit"
+                  color="primary" 
+                  class="create-button"
+                  [disabled]="usernameForm.invalid || isLoading">
+            <mat-spinner *ngIf="isLoading" diameter="20"></mat-spinner>
+            <mat-icon *ngIf="!isLoading">person_add</mat-icon>
+            <span>{{ isLoading ? 'Creating...' : 'Create Username' }}</span>
+          </button>
+        </div>
+      </form>
+
+      <!-- Additional Information -->
+      <div class="info-section" [@fadeIn]>
+        <mat-card class="info-card" elevation="2">
+          <mat-card-content>
+            <div class="info-header">
+              <mat-icon class="info-icon">info</mat-icon>
+              <h4>Username Guidelines</h4>
+            </div>
+            <ul class="guidelines-list">
+              <li>Must be at least 8 characters long</li>
+              <li>Can only contain letters (A-Z, a-z) and numbers (0-9)</li>
+              <li>Must be unique (not already taken)</li>
+              <li>Cannot be changed later, so choose carefully</li>
+            </ul>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-card>
+  </div>
+</div>

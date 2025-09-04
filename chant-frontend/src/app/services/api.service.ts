@@ -32,10 +32,10 @@ export interface TotalChantsResponse {
 })
 export class ApiService {
   // For Development:
-  // private baseUrl = 'http://localhost:8080/api';
+  private baseUrl = 'http://localhost:8080/api';
 
   // For Testing/Production:
-  private baseUrl = 'https://chant-counter.onrender.com/api';
+  // private baseUrl = 'https://chant-counter.onrender.com/api';
 
   constructor(private http: HttpClient) { }
 
@@ -71,5 +71,10 @@ export class ApiService {
 
   getTotalChants(): Observable<TotalChantsResponse> {
     return this.http.get<TotalChantsResponse>(`${this.baseUrl}/chants/total`);
+  }
+
+  isUserExists(userId: string): Observable<boolean> {
+    const normalizedUserId = this.normalizeUserId(userId);
+    return this.http.get<boolean>(`${this.baseUrl}/users/exists/${normalizedUserId}`);
   }
 }

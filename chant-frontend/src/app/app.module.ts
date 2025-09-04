@@ -26,7 +26,7 @@ import { HomeComponent } from './components/home/home.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { UserTypeComponent } from './components/user-type/user-type.component';
 import { AddChantComponent } from './components/add-chant/add-chant.component';
-import { DuplicateUsernameDialogComponent } from './components/duplicate-username-dialog/duplicate-username-dialog.component';
+import { CreateUsernameComponent } from './components/create-username/create-username.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +35,7 @@ import { DuplicateUsernameDialogComponent } from './components/duplicate-usernam
     LandingComponent,
     UserTypeComponent,
     AddChantComponent,
-    DuplicateUsernameDialogComponent
+    CreateUsernameComponent
   ],
   imports: [
     BrowserModule,

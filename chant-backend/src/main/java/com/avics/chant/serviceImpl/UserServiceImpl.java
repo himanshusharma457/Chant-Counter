@@ -76,4 +76,15 @@ public class UserServiceImpl implements UserService {
             return Optional.empty();
         }
     }
+
+    @Override
+    public boolean isUserExists(String identifier) {
+        try {
+            String normalizedIdentifier = validationUtil.normalizeUserId(identifier);
+            return findUser(normalizedIdentifier).isPresent();
+        } catch (Exception e) {
+            log.error("Error checking user existence: {}", e.getMessage(), e);
+            return false;
+        }
+    }
 }

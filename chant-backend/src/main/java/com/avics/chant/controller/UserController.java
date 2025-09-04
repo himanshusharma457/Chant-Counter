@@ -18,4 +18,9 @@ public class UserController {
     public ResponseEntity<ApiResponse> createUser(@RequestBody CreateUserRequest request){
         return ResponseEntity.ok(userService.createUser(request));
     }
+
+    @GetMapping("/exists/{userId}")
+    public ResponseEntity<Boolean> isUserExists(@PathVariable String userId){
+        return ResponseEntity.ok(userService.isUserExists(userId));
+    }
 }

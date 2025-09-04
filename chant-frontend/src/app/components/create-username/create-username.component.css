@@ -1,0 +1,252 @@
+.create-username-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  flex-direction: column;
+  font-family: 'Roboto', sans-serif;
+}
+
+.hero-section {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 2rem 1rem;
+  text-align: center;
+  color: white;
+}
+
+.hero-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.hero-title {
+  font-size: 2.5rem;
+  font-weight: 300;
+  margin: 0 0 0.5rem 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin: 0 0 0.5rem 0;
+  opacity: 0.9;
+}
+
+.welcome-message {
+  font-size: 1rem;
+  margin: 0;
+  opacity: 0.8;
+}
+
+.content-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2rem 1rem;
+}
+
+.main-card {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+  padding: 2rem;
+  text-align: center;
+}
+
+.header-icon {
+  font-size: 3rem;
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: 1rem;
+}
+
+.card-title {
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin: 0 0 0.5rem 0;
+}
+
+.card-subtitle {
+  font-size: 1rem;
+  margin: 0;
+  opacity: 0.9;
+}
+
+.username-form {
+  padding: 2rem;
+}
+
+.form-section {
+  margin-bottom: 2rem;
+}
+
+.input-container {
+  margin-bottom: 1.5rem;
+}
+
+.professional-field {
+  width: 100%;
+}
+
+.professional-field .mat-form-field-outline {
+  background: rgba(103, 126, 234, 0.05);
+}
+
+.professional-field.mat-focused .mat-form-field-outline {
+  background: rgba(103, 126, 234, 0.1);
+}
+
+.professional-field .mat-form-field-prefix .mat-icon {
+  color: #667eea;
+  margin-right: 0.5rem;
+}
+
+.action-section {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.back-button {
+  flex: 1;
+  height: 48px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.create-button {
+  flex: 2;
+  height: 48px;
+  border-radius: 8px;
+  font-weight: 500;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.create-button:disabled {
+  background: #ccc !important;
+  color: #666 !important;
+}
+
+.create-button mat-spinner {
+  margin-right: 0.5rem;
+}
+
+.create-button mat-icon {
+  margin-right: 0.5rem;
+}
+
+.info-section {
+  padding: 0 2rem 2rem 2rem;
+}
+
+.info-card {
+  border-radius: 12px;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+}
+
+.info-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.info-icon {
+  margin-right: 0.5rem;
+  color: white;
+}
+
+.info-header h4 {
+  margin: 0;
+  font-weight: 500;
+}
+
+.guidelines-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.guidelines-list li {
+  padding: 0.25rem 0;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.guidelines-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #4CAF50;
+  font-weight: bold;
+}
+
+/* Error and Success Snackbar Styles */
+::ng-deep .success-snackbar {
+  background: #4CAF50 !important;
+  color: white !important;
+}
+
+::ng-deep .error-snackbar {
+  background: #f44336 !important;
+  color: white !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .content-wrapper {
+    padding: 1rem;
+  }
+  
+  .username-form {
+    padding: 1.5rem;
+  }
+  
+  .action-section {
+    flex-direction: column;
+  }
+  
+  .back-button,
+  .create-button {
+    flex: none;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 1.8rem;
+  }
+  
+  .main-card {
+    margin: 0;
+    border-radius: 0;
+  }
+  
+  .card-header {
+    padding: 1.5rem;
+  }
+  
+  .username-form {
+    padding: 1rem;
+  }
+}

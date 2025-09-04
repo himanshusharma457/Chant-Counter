@@ -89,19 +89,12 @@
 
           <!-- Username Input -->
           <div *ngIf="mode === 'username'" class="input-container">
-            <!-- Show mode change indicator only when user actually switched -->
-            <div *ngIf="switchedToExistingMode" class="mode-change-indicator">
-              <mat-icon class="mode-icon">info</mat-icon>
-              <span class="mode-text">Switched to existing user mode</span>
-            </div>
-            
             <mat-form-field appearance="outline" class="full-width professional-field">
               <mat-label>{{ getUsernameLabel() }}</mat-label>
               <mat-icon matPrefix>account_circle</mat-icon>
               <input matInput 
                      formControlName="customUserId" 
-                     [placeholder]="getUsernamePlaceholder()"
-                     [readonly]="userType === 'existing' && existingUsername">
+                     [placeholder]="getUsernamePlaceholder()">
               <mat-hint>{{ getUsernameHint() }}</mat-hint>
               <mat-error *ngIf="chantForm.get('customUserId')?.hasError('required')">
                 User ID is required
@@ -111,17 +104,17 @@
               </mat-error>
             </mat-form-field>
             
-            <!-- For existing users, add a button to verify username -->
-            <div *ngIf="userType === 'existing' && !userStats && chantForm.get('customUserId')?.value && !existingUsername" class="verify-section">
+            <!-- For existing users, add a button to check total count -->
+            <div *ngIf="userType === 'existing' && !userStats && chantForm.get('customUserId')?.value && chantForm.get('customUserId')?.valid" class="verify-section">
               <button mat-stroked-button 
                       type="button"
                       color="primary" 
-                      (click)="verifyExistingUser()"
+                      (click)="checkUsernameStats()"
                       [disabled]="isVerifying"
                       class="verify-button">
                 <mat-icon *ngIf="!isVerifying">search</mat-icon>
                 <mat-spinner *ngIf="isVerifying" diameter="20"></mat-spinner>
-                <span>{{ isVerifying ? 'Verifying...' : 'Verify Username' }}</span>
+                <span>{{ isVerifying ? 'Checking...' : 'Check My Total Count' }}</span>
               </button>
             </div>
           </div>

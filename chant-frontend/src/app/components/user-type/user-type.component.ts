@@ -30,8 +30,8 @@ export class UserTypeComponent {
   }
 
   selectNewUser(): void {
-    // Navigate directly to add chant page with new username mode
-    this.router.navigate(['/add-chant'], { queryParams: { mode: 'username', userType: 'new' } });
+    // Navigate to the create username page
+    this.router.navigate(['/create-username']);
   }
 
   goBack(): void {

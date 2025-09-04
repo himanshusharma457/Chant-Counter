@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatDialog } from '@angular/material/dialog';
-import { DuplicateUsernameDialogComponent } from '../duplicate-username-dialog/duplicate-username-dialog.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { ApiService, ApiResponse, UserTotalResponse, TotalChantsResponse } from '../../services/api.service';
@@ -34,14 +32,11 @@ export class AddChantComponent implements OnInit {
   isVerifying = false;
   userStats: UserTotalResponse | null = null;
   totalStats: TotalChantsResponse | null = null;
-  existingUsername: string | null = null;
-  switchedToExistingMode = false; // Flag to track if user switched from new to existing mode
 
   constructor(
     private fb: FormBuilder,
     private apiService: ApiService,
     private snackBar: MatSnackBar,
-    private dialog: MatDialog,
     private route: ActivatedRoute,
     private router: Router
   ) {
@@ -58,10 +53,37 @@ export class AddChantComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.mode = params['mode'] || 'phone';
       this.userType = params['userType'] || null;
+      
+      // If username is provided in query params (from create-username component or existing user)
+      if (params['username']) {
+        this.chantForm.patchValue({ customUserId: params['username'] });
+      }
+      
       this.updateValidators();
     });
     
     this.loadTotalStats();
+    this.setupFormChangeListeners();
+  }
+
+  private setupFormChangeListeners(): void {
+    // Listen for changes in phone number input
+    this.chantForm.get('phoneNumber')?.valueChanges.subscribe((value) => {
+      if (this.mode === 'phone') {
+        // Reset user stats when phone number changes
+        this.userStats = null;
+        this.isVerifying = false;
+      }
+    });
+
+    // Listen for changes in username input
+    this.chantForm.get('customUserId')?.valueChanges.subscribe((value) => {
+      if (this.mode === 'username') {
+        // Reset user stats when username changes
+        this.userStats = null;
+        this.isVerifying = false;
+      }
+    });
   }
 
   // Custom validator to prevent future dates
@@ -138,7 +160,7 @@ export class AddChantComponent implements OnInit {
       : 'Minimum 8 characters, letters and numbers allowed';
   }
 
-  verifyExistingUser(): void {
+  checkUsernameStats(): void {
     const username = this.chantForm.get('customUserId')?.value;
     if (!username) return;
 
@@ -165,12 +187,6 @@ export class AddChantComponent implements OnInit {
   submitChant(): void {
     if (this.chantForm.invalid) {
       this.markFormGroupTouched();
-      return;
-    }
-
-    // For existing username users, check if username is verified
-    if (this.mode === 'username' && this.userType === 'existing' && !this.userStats) {
-      this.showMessage('Please verify your username first before adding chant count.', 'error');
       return;
     }
 
@@ -247,7 +263,7 @@ export class AddChantComponent implements OnInit {
           this.apiService.addChant(chantRequest).subscribe({
             next: (chantResponse: ApiResponse) => {
               if (chantResponse.success) {
-                const successMessage = this.mode === 'username' && this.userType === 'new' 
+                const successMessage = this.mode === 'username' 
                   ? 'Username created and chant count added successfully!' 
                   : 'User created and chant count added successfully!';
                 this.showMessage(successMessage, 'success');
@@ -269,8 +285,9 @@ export class AddChantComponent implements OnInit {
           // Handle specific error messages
           if (response.message.toLowerCase().includes('already exists') || 
               response.message.toLowerCase().includes('user exists')) {
-            // Username already exists - show specific error and redirect option
-            this.handleExistingUsernameError(userId, chantRequest);
+            // Username already exists - show error message
+            this.showMessage('This username already exists. Please choose a different username.', 'error');
+            this.isLoading = false;
           } else {
             this.showMessage(response.message, 'error');
             this.isLoading = false;
@@ -285,79 +302,45 @@ export class AddChantComponent implements OnInit {
     });
   }
 
-  private handleExistingUsernameError(userId: string, chantRequest: any): void {
-    this.isLoading = false;
-    
-    // Show a dialog with both options
-    const dialogRef = this.dialog.open(DuplicateUsernameDialogComponent, {
-      width: '400px',
-      data: { username: userId }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === 'continue') {
-        // User clicked "Yes, Continue" - proceed as existing user
-        this.proceedAsExistingUser(userId, chantRequest);
-      } else if (result === 'create-new') {
-        // User clicked "No, Create new user" - clear form and show message
-        this.showMessage('Please enter a different username to create a new account.', 'error');
-        this.chantForm.patchValue({ customUserId: '' });
-        // Focus on the username field
-        setTimeout(() => {
-          const usernameField = document.querySelector('input[formControlName="customUserId"]') as HTMLInputElement;
-          if (usernameField) {
-            usernameField.focus();
-          }
-        }, 100);
-      }
-      // If result is null/undefined, user clicked outside or pressed escape - do nothing
-    });
-  }
-
-  private proceedAsExistingUser(userId: string, chantRequest: any): void {
-    this.isLoading = true;
-    this.userType = 'existing'; // Change the mode to existing user
-    this.switchedToExistingMode = true; // Set flag to show switch message
-    
-    // Update the form to reflect the change to existing user mode
-    this.chantForm.get('customUserId')?.setValue(userId);
-    
-    // First verify the user exists and load their stats
-    this.loadUserStats(userId);
-    
-    // Then add the chant
-    this.apiService.addChant(chantRequest).subscribe({
-      next: (chantResponse: ApiResponse) => {
-        if (chantResponse.success) {
-          this.showMessage('Username verified and chant count added successfully!', 'success');
-          this.loadUserStats(userId);
-          this.loadTotalStats();
-          this.chantForm.patchValue({ count: '', date: '' });
-        } else {
-          this.showMessage(chantResponse.message, 'error');
-        }
-        this.isLoading = false;
-      },
-      error: (error) => {
-        console.error('Error adding chant for existing user:', error);
-        this.showMessage('Error adding chant count. Please try again.', 'error');
-        this.isLoading = false;
-      }
-    });
-  }
-
   private loadUserStats(userId: string): void {
+    // For username mode, first check if user exists
+    if (this.mode === 'username') {
+      this.apiService.isUserExists(userId).subscribe({
+        next: (exists: boolean) => {
+          if (exists) {
+            // User exists, load their stats
+            this.getUserTotalStats(userId);
+          } else {
+            // User doesn't exist
+            this.isVerifying = false;
+            this.userStats = null;
+            this.showMessage('Username not found. Please verify your username or create a new account.', 'error');
+          }
+        },
+        error: (error) => {
+          console.error('Error checking user existence:', error);
+          this.isVerifying = false;
+          this.userStats = null;
+          this.showMessage('Error checking username. Please try again.', 'error');
+        }
+      });
+    } else {
+      // For phone numbers, directly load stats (handles auto-creation)
+      this.getUserTotalStats(userId);
+    }
+  }
+
+  private getUserTotalStats(userId: string): void {
     this.apiService.getUserTotal(userId).subscribe({
       next: (stats: UserTotalResponse) => {
         this.userStats = stats;
-        this.existingUsername = userId;
         this.isVerifying = false;
         
         // Show appropriate success message based on mode
         if (this.mode === 'phone') {
           this.showMessage(`Phone number verified! Your total count: ${stats.totalCount}`, 'success');
-        } else if (this.userType === 'existing') {
-          this.showMessage('Username verified successfully!', 'success');
+        } else {
+          this.showMessage(`Total count loaded! Your total count: ${stats.totalCount}`, 'success');
         }
       },
       error: (error) => {
@@ -368,13 +351,10 @@ export class AddChantComponent implements OnInit {
         if (this.mode === 'phone') {
           this.showMessage('Phone number not found in our records. You can still add your first chant count.', 'error');
           this.userStats = null;
-          this.existingUsername = null;
-        } else if (this.userType === 'existing') {
+        } else {
           this.showMessage('Username not found. Please check and try again.', 'error');
           this.userStats = null;
-          this.existingUsername = null;
         }
-        // For phone numbers or successful operations, don't show error for getUserTotal failures
       }
     });
   }

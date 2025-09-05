@@ -130,18 +130,18 @@ export class AddChantComponent implements OnInit {
 
   getIdentificationTitle(): string {
     if (this.mode === 'phone') {
-      return 'Phone Number';
+      return 'Phone Number Identification';
     }
-    return this.userType === 'existing' ? 'Your Username' : 'Create Username';
+    return this.userType === 'existing' ? 'Enter Your Username' : 'Create Your Username';
   }
 
   getIdentificationDescription(): string {
     if (this.mode === 'phone') {
-      return 'Enter your phone number';
+      return 'Enter your phone number to track your chants';
     }
     return this.userType === 'existing' 
-      ? 'Enter your existing username'
-      : 'Create a unique username';
+      ? 'Enter your existing username to continue tracking'
+      : 'Create a unique username for your spiritual journey';
   }
 
   getUsernameLabel(): string {
@@ -150,14 +150,14 @@ export class AddChantComponent implements OnInit {
 
   getUsernamePlaceholder(): string {
     return this.userType === 'existing' 
-      ? 'Enter username'
-      : 'Create your user ID';
+      ? 'Enter your existing username'
+      : 'Create your unique user ID';
   }
 
   getUsernameHint(): string {
     return this.userType === 'existing'
-      ? 'Your existing username'
-      : 'Min 8 characters';
+      ? 'Enter the username you previously created'
+      : 'Minimum 8 characters, letters and numbers allowed';
   }
 
   checkUsernameStats(): void {

@@ -9,7 +9,7 @@
 .hero-section {
   background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%);
   color: white;
-  padding: 3rem 2rem;
+  padding: 1.5rem 1rem;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -34,16 +34,16 @@
 }
 
 .hero-title {
-  font-size: 3.5rem;
+  font-size: 2.5rem;
   font-weight: 300;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .hero-subtitle {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   opacity: 0.9;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   font-weight: 300;
 }
 
@@ -56,7 +56,7 @@
 
 .content-wrapper {
   flex: 1;
-  padding: 2rem;
+  padding: 1rem;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -67,28 +67,28 @@
   max-width: 900px;
   width: 100%;
   background: rgba(255, 255, 255, 0.95);
-  border-radius: 20px;
+  border-radius: 16px;
   backdrop-filter: blur(10px);
-  padding: 3rem;
-  margin-top: -2rem;
+  padding: 2rem;
+  margin-top: -1rem;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 
 .card-header {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 
 .header-icon {
-  font-size: 3rem;
-  width: 3rem;
-  height: 3rem;
+  font-size: 2.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
   color: #667eea;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .card-title {
-  font-size: 2.2rem;
+  font-size: 1.7rem;
   color: #333;
   margin-bottom: 0.5rem;
   font-weight: 400;
@@ -254,29 +254,37 @@
 /* Mobile responsiveness */
 @media (max-width: 767px) {
   .hero-title {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
   
   .hero-subtitle {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
   
   .main-card {
-    padding: 2rem;
-    margin: 1rem;
+    padding: 1.5rem;
+    margin: 0.5rem;
   }
   
   .option-content {
-    min-height: 250px;
-    padding: 1.5rem;
+    min-height: 180px;
+    padding: 1.2rem;
   }
   
   .option-icon-wrapper {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
   }
   
   .option-icon {
-    font-size: 2rem;
+    font-size: 1.8rem;
+  }
+  
+  .option-title {
+    font-size: 1.2rem;
+  }
+  
+  .option-description {
+    font-size: 0.85rem;
   }
 }

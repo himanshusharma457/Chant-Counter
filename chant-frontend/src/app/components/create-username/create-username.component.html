@@ -29,15 +29,15 @@
                      formControlName="username" 
                      placeholder="Enter your username"
                      autocomplete="off">
-              <mat-hint>Min 8 characters, letters/numbers only</mat-hint>
+              <mat-hint>Minimum 8 characters, letters and numbers only</mat-hint>
               <mat-error *ngIf="usernameForm.get('username')?.hasError('required')">
-                Username required
+                Username is required
               </mat-error>
               <mat-error *ngIf="usernameForm.get('username')?.hasError('minlength')">
-                Min 8 characters required
+                Username must be at least 8 characters long
               </mat-error>
               <mat-error *ngIf="usernameForm.get('username')?.hasError('pattern')">
-                Letters and numbers only
+                Username can only contain letters and numbers
               </mat-error>
             </mat-form-field>
           </div>
@@ -51,12 +51,12 @@
                      formControlName="confirmUsername" 
                      placeholder="Re-enter your username"
                      autocomplete="off">
-              <mat-hint>Must match above</mat-hint>
+              <mat-hint>Must match the username above</mat-hint>
               <mat-error *ngIf="usernameForm.get('confirmUsername')?.hasError('required')">
-                Confirm username
+                Please confirm your username
               </mat-error>
               <mat-error *ngIf="usernameForm.get('confirmUsername')?.hasError('mismatch')">
-                Usernames don't match
+                Usernames do not match
               </mat-error>
             </mat-form-field>
           </div>
@@ -81,7 +81,7 @@
                   [disabled]="usernameForm.invalid || isLoading">
             <mat-spinner *ngIf="isLoading" diameter="20"></mat-spinner>
             <mat-icon *ngIf="!isLoading">person_add</mat-icon>
-            <span>{{ isLoading ? 'Creating...' : 'Create' }}</span>
+            <span>{{ isLoading ? 'Creating...' : 'Create Username' }}</span>
           </button>
         </div>
       </form>
@@ -95,10 +95,10 @@
               <h4>Username Guidelines</h4>
             </div>
             <ul class="guidelines-list">
-              <li>Min 8 characters</li>
-              <li>Letters and numbers only</li>
-              <li>Must be unique</li>
-              <li>Cannot be changed later</li>
+              <li>Must be at least 8 characters long</li>
+              <li>Can only contain letters (A-Z, a-z) and numbers (0-9)</li>
+              <li>Must be unique (not already taken)</li>
+              <li>Cannot be changed later, so choose carefully</li>
             </ul>
           </mat-card-content>
         </mat-card>

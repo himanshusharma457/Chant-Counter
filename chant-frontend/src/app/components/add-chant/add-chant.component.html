@@ -4,7 +4,7 @@
     <div class="hero-content">
       <h1 class="hero-title">Om Namah Shivaya 🙏</h1>
       <p class="hero-subtitle">Track your spiritual journey</p>
-      <p class="welcome-message">Add your chant count.</p>
+      <p class="welcome-message">Add your chant count</p>
     </div>
   </div>
 
@@ -21,7 +21,7 @@
             <div class="stat-details">
               <h3 class="stat-label">Your Total</h3>
               <p class="stat-number">{{ userStats.totalCount | number }}</p>
-              <p class="stat-sublabel">Chants</p>
+              <p class="stat-sublabel">Total Chants</p>
             </div>
           </mat-card-content>
         </mat-card>
@@ -32,9 +32,9 @@
               <mat-icon class="stat-icon">groups</mat-icon>
             </div>
             <div class="stat-details">
-              <h3 class="stat-label">Community</h3>
+              <h3 class="stat-label">Community Total</h3>
               <p class="stat-number">{{ totalStats.totalChants | number }}</p>
-              <p class="stat-sublabel">All Users</p>
+              <p class="stat-sublabel">All Practitioners</p>
             </div>
           </mat-card-content>
         </mat-card>
@@ -59,16 +59,16 @@
               <mat-icon matPrefix>phone</mat-icon>
               <input matInput 
                      formControlName="phoneNumber" 
-                     placeholder="Enter 10-digit number"
+                     placeholder="Enter 10-digit mobile number"
                      maxlength="10"
                      pattern="[0-9]*"
                      type="tel">
-              <mat-hint>Used as your unique ID</mat-hint>
+              <mat-hint>Your mobile number will be used as your unique identifier</mat-hint>
               <mat-error *ngIf="chantForm.get('phoneNumber')?.hasError('required')">
-                Mobile number required
+                Mobile number is required
               </mat-error>
               <mat-error *ngIf="chantForm.get('phoneNumber')?.hasError('pattern')">
-                Enter valid 10-digit number
+                Please enter a valid 10-digit mobile number
               </mat-error>
             </mat-form-field>
             
@@ -82,7 +82,7 @@
                       class="verify-button">
                 <mat-icon *ngIf="!isVerifying">search</mat-icon>
                 <mat-spinner *ngIf="isVerifying" diameter="20"></mat-spinner>
-                <span>{{ isVerifying ? 'Checking...' : 'Check Count' }}</span>
+                <span>{{ isVerifying ? 'Verifying...' : 'Check My Total Count' }}</span>
               </button>
             </div>
           </div>
@@ -97,10 +97,10 @@
                      [placeholder]="getUsernamePlaceholder()">
               <mat-hint>{{ getUsernameHint() }}</mat-hint>
               <mat-error *ngIf="chantForm.get('customUserId')?.hasError('required')">
-                Username required
+                User ID is required
               </mat-error>
               <mat-error *ngIf="chantForm.get('customUserId')?.hasError('minlength')">
-                Min 8 characters required
+                User ID must be at least 8 characters long
               </mat-error>
             </mat-form-field>
             
@@ -114,7 +114,7 @@
                       class="verify-button">
                 <mat-icon *ngIf="!isVerifying">search</mat-icon>
                 <mat-spinner *ngIf="isVerifying" diameter="20"></mat-spinner>
-                <span>{{ isVerifying ? 'Checking...' : 'Check Count' }}</span>
+                <span>{{ isVerifying ? 'Checking...' : 'Check My Total Count' }}</span>
               </button>
             </div>
           </div>
@@ -124,21 +124,21 @@
         <div class="form-section">
           <div class="section-header">
             <mat-icon class="section-icon">format_list_numbered</mat-icon>
-            <h2 class="section-title">Count</h2>
+            <h2 class="section-title">Chant Count</h2>
           </div>
-          <p class="section-description">Enter your practice count</p>
+          <p class="section-description">Record your spiritual practice</p>
           
           <mat-form-field appearance="outline" class="full-width professional-field">
-            <mat-label>Chant Count</mat-label>
+            <mat-label>Number of Chants</mat-label>
             <mat-icon matPrefix>add_circle</mat-icon>
             <input matInput 
                    type="number" 
                    formControlName="count" 
                    placeholder="Enter count"
                    min="1">
-            <mat-hint>Number of chants completed</mat-hint>
+            <mat-hint>Enter the number of chants completed</mat-hint>
             <mat-error *ngIf="chantForm.get('count')?.hasError('required')">
-              Count required
+              Chant count is required
             </mat-error>
             <mat-error *ngIf="chantForm.get('count')?.hasError('min')">
               Count must be at least 1
@@ -150,9 +150,9 @@
         <div class="form-section">
           <div class="section-header">
             <mat-icon class="section-icon">event</mat-icon>
-            <h2 class="section-title">Date</h2>
+            <h2 class="section-title">Date Selection</h2>
           </div>
-          <p class="section-description">Select date (optional, defaults to today)</p>
+          <p class="section-description">Specify the date for this entry (defaults to today)</p>
           
           <mat-form-field appearance="outline" class="full-width professional-field">
             <mat-label>Date</mat-label>
@@ -166,9 +166,9 @@
               <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
             </mat-datepicker-toggle>
             <mat-datepicker #picker [startAt]="getMaxDate()"></mat-datepicker>
-            <mat-hint>Leave empty for today</mat-hint>
+            <mat-hint>Leave empty to use today's date</mat-hint>
             <mat-error *ngIf="chantForm.get('date')?.hasError('futureDate')">
-              Future dates not allowed
+              Future dates are not allowed
             </mat-error>
           </mat-form-field>
         </div>

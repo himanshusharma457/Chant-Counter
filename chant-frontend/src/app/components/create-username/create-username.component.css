@@ -10,7 +10,7 @@
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 2rem 1rem;
+  padding: 1.5rem 1rem;
   text-align: center;
   color: white;
 }
@@ -21,21 +21,21 @@
 }
 
 .hero-title {
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   font-weight: 300;
-  margin: 0 0 0.5rem 0;
+  margin: 0 0 0.4rem 0;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .hero-subtitle {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 500;
-  margin: 0 0 0.5rem 0;
+  margin: 0 0 0.3rem 0;
   opacity: 0.9;
 }
 
 .welcome-message {
-  font-size: 1rem;
+  font-size: 0.9rem;
   margin: 0;
   opacity: 0.8;
 }
@@ -45,7 +45,7 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding: 2rem 1rem;
+  padding: 1.5rem 1rem;
 }
 
 .main-card {
@@ -59,25 +59,25 @@
 .card-header {
   background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
   color: white;
-  padding: 2rem;
+  padding: 1.5rem;
   text-align: center;
 }
 
 .header-icon {
-  font-size: 3rem;
-  width: 3rem;
-  height: 3rem;
-  margin-bottom: 1rem;
+  font-size: 2.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .card-title {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   font-weight: 500;
-  margin: 0 0 0.5rem 0;
+  margin: 0 0 0.3rem 0;
 }
 
 .card-subtitle {
-  font-size: 1rem;
+  font-size: 0.9rem;
   margin: 0;
   opacity: 0.9;
 }
@@ -237,13 +237,35 @@
     font-size: 1.8rem;
   }
   
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+  
+  .welcome-message {
+    font-size: 0.85rem;
+  }
+  
   .main-card {
     margin: 0;
     border-radius: 0;
   }
   
   .card-header {
-    padding: 1.5rem;
+    padding: 1.2rem;
+  }
+  
+  .header-icon {
+    font-size: 2rem;
+    width: 2rem;
+    height: 2rem;
+  }
+  
+  .card-title {
+    font-size: 1.3rem;
+  }
+  
+  .card-subtitle {
+    font-size: 0.85rem;
   }
   
   .username-form {

@@ -3,8 +3,8 @@
   <div class="hero-section">
     <div class="hero-content">
       <h1 class="hero-title">Om Namah Shivaya 🙏</h1>
-      <p class="hero-subtitle">Create Your Username</p>
-      <p class="welcome-message">Create a unique username for your spiritual journey</p>
+      <p class="hero-subtitle">Create Username</p>
+      <p class="welcome-message">Create your unique username</p>
     </div>
   </div>
 
@@ -13,8 +13,8 @@
     <mat-card class="main-card" elevation="8" [@slideIn]>
       <div class="card-header">
         <mat-icon class="header-icon">person_add</mat-icon>
-        <h2 class="card-title">Create Your Username</h2>
-        <p class="card-subtitle">Enter your desired username twice to confirm</p>
+        <h2 class="card-title">Create Username</h2>
+        <p class="card-subtitle">Enter username twice to confirm</p>
       </div>
 
       <!-- Username Creation Form -->
@@ -29,15 +29,15 @@
                      formControlName="username" 
                      placeholder="Enter your username"
                      autocomplete="off">
-              <mat-hint>Minimum 8 characters, letters and numbers only</mat-hint>
+              <mat-hint>Min 8 characters, letters/numbers only</mat-hint>
               <mat-error *ngIf="usernameForm.get('username')?.hasError('required')">
-                Username is required
+                Username required
               </mat-error>
               <mat-error *ngIf="usernameForm.get('username')?.hasError('minlength')">
-                Username must be at least 8 characters long
+                Min 8 characters required
               </mat-error>
               <mat-error *ngIf="usernameForm.get('username')?.hasError('pattern')">
-                Username can only contain letters and numbers
+                Letters and numbers only
               </mat-error>
             </mat-form-field>
           </div>
@@ -51,12 +51,12 @@
                      formControlName="confirmUsername" 
                      placeholder="Re-enter your username"
                      autocomplete="off">
-              <mat-hint>Must match the username above</mat-hint>
+              <mat-hint>Must match above</mat-hint>
               <mat-error *ngIf="usernameForm.get('confirmUsername')?.hasError('required')">
-                Please confirm your username
+                Confirm username
               </mat-error>
               <mat-error *ngIf="usernameForm.get('confirmUsername')?.hasError('mismatch')">
-                Usernames do not match
+                Usernames don't match
               </mat-error>
             </mat-form-field>
           </div>
@@ -81,7 +81,7 @@
                   [disabled]="usernameForm.invalid || isLoading">
             <mat-spinner *ngIf="isLoading" diameter="20"></mat-spinner>
             <mat-icon *ngIf="!isLoading">person_add</mat-icon>
-            <span>{{ isLoading ? 'Creating...' : 'Create Username' }}</span>
+            <span>{{ isLoading ? 'Creating...' : 'Create' }}</span>
           </button>
         </div>
       </form>
@@ -95,10 +95,10 @@
               <h4>Username Guidelines</h4>
             </div>
             <ul class="guidelines-list">
-              <li>Must be at least 8 characters long</li>
-              <li>Can only contain letters (A-Z, a-z) and numbers (0-9)</li>
-              <li>Must be unique (not already taken)</li>
-              <li>Cannot be changed later, so choose carefully</li>
+              <li>Min 8 characters</li>
+              <li>Letters and numbers only</li>
+              <li>Must be unique</li>
+              <li>Cannot be changed later</li>
             </ul>
           </mat-card-content>
         </mat-card>

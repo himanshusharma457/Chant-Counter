@@ -356,51 +356,124 @@
 
 /* Mobile responsiveness */
 @media (max-width: 767px) {
+  .hero-section {
+    padding: 1rem 0.5rem;
+  }
+  
   .hero-title {
-    font-size: 2.2rem;
+    font-size: 1.8rem;
+    margin-bottom: 0.25rem;
   }
   
   .hero-subtitle {
-    font-size: 1rem;
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  .welcome-message {
+    font-size: 0.8rem;
   }
   
   .content-wrapper {
-    padding: 1rem;
+    padding: 0.5rem;
   }
   
   .main-card {
-    padding: 2rem;
+    padding: 1rem;
+    margin: 0.5rem;
+  }
+  
+  .form-section {
+    margin-bottom: 1.5rem;
+  }
+  
+  .section-header {
+    margin-bottom: 0.5rem;
+  }
+  
+  .section-icon {
+    font-size: 1.3rem;
+    margin-right: 0.5rem;
+  }
+  
+  .section-title {
+    font-size: 1.1rem;
+  }
+  
+  .section-description {
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+    line-height: 1.3;
   }
   
   .action-section {
     flex-direction: column;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    gap: 0.5rem;
   }
   
   .back-button,
   .submit-button {
     width: 100%;
-    margin: 0.5rem 0;
+    margin: 0.25rem 0;
+    font-size: 0.95rem;
+    padding: 0.6rem 1.5rem;
   }
   
   .stats-grid {
     grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
   }
   
   .stat-content {
-    padding: 1rem;
+    padding: 0.75rem;
   }
   
   .stat-icon-wrapper {
-    width: 50px;
-    height: 50px;
-    margin-right: 1rem;
+    width: 40px;
+    height: 40px;
+    margin-right: 0.75rem;
   }
   
   .stat-icon {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
+  }
+  
+  .stat-label {
+    font-size: 0.85rem;
+    margin: 0 0 0.25rem 0;
   }
   
   .stat-number {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
+    margin: 0 0 0.1rem 0;
+  }
+  
+  .stat-sublabel {
+    font-size: 0.75rem;
+  }
+  
+  .verify-button {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+  
+  /* Optimize form field sizes for mobile */
+  ::ng-deep .mat-form-field {
+    font-size: 0.9rem;
+  }
+  
+  ::ng-deep .mat-form-field-label {
+    font-size: 0.9rem;
+  }
+  
+  ::ng-deep .mat-hint {
+    font-size: 0.75rem;
+  }
+  
+  ::ng-deep .mat-error {
+    font-size: 0.75rem;
   }
 }

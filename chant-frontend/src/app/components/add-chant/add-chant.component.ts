@@ -130,9 +130,9 @@ export class AddChantComponent implements OnInit {
 
   getIdentificationTitle(): string {
     if (this.mode === 'phone') {
-      return 'Phone Number Identification';
+      return 'Phone Number';
     }
-    return this.userType === 'existing' ? 'Enter Your Username' : 'Create Your Username';
+    return this.userType === 'existing' ? 'Username' : 'Create Username';
   }
 
   getIdentificationDescription(): string {

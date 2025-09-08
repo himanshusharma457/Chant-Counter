@@ -57,11 +57,13 @@
   flex: 1;
   padding: 1rem;
   background: rgba(255, 255, 255, 0.1);
+  justify-content: center;
+  align-items: center;
 }
 
 .stats-container {
   max-width: 1200px;
-  margin: 0 auto 1.5rem auto;
+  margin: 0 auto 1rem auto;
 }
 
 .stats-grid {
@@ -374,11 +376,11 @@
   }
   
   .main-card {
-    padding: 1.5rem;
+    padding: 1.2rem;
   }
   
   .form-section {
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.8rem;
   }
   
   .section-header {
@@ -401,15 +403,15 @@
   
   .action-section {
     flex-direction: column;
-    margin-top: 1.2rem;
-    padding-top: 1.2rem;
+    margin-top: 0.6rem;
+    padding-top: 0.6rem;
   }
   
   .back-button,
   .submit-button {
     width: 100%;
-    margin: 0.3rem 0;
-    padding: 0.6rem 1.3rem;
+    margin: 0.2rem 0;
+    padding: 0.2rem 1.3rem;
     font-size: 0.95rem;
   }
   

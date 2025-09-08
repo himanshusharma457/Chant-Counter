@@ -59,7 +59,8 @@
   padding: 1rem;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  /* align-items: flex-start; */
+  align-items: center;
   background: rgba(255, 255, 255, 0.1);
 }
 
@@ -88,10 +89,10 @@
 }
 
 .card-title {
-  font-size: 1.7rem;
+  font-size: 1.2rem;
   color: #333;
-  margin-bottom: 0.3rem;
-  font-weight: 400;
+  margin-bottom: 0.1rem;
+  font-weight: 500;
 }
 
 .card-subtitle {
@@ -103,8 +104,8 @@
 .options-container {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
+  gap: 0.8rem;
+  /* margin-bottom: 0.2rem; */
 }
 
 @media (min-width: 768px) {
@@ -138,14 +139,14 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 1.5rem 1rem;
-  min-height: 220px;
+  padding: 0.8rem 0.8rem;
+  min-height: 200px;
   position: relative;
 }
 
 .option-icon-wrapper {
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -229,16 +230,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 2rem;
-  padding-top: 2rem;
+  margin-top: 0.5rem;
+  padding-top: 1rem;
   border-top: 1px solid #eee;
-  gap: 1rem;
+  /* gap: 1rem; */
 }
 
 .back-button,
 .continue-button {
   font-size: 1.1rem;
-  padding: 0.8rem 2rem;
+  padding: 0.5rem 2rem;
   border-radius: 50px;
   text-transform: none;
   font-weight: 500;

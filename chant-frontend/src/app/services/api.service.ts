@@ -35,7 +35,7 @@ export class ApiService {
   // private baseUrl = 'http://localhost:8080/api';
 
   // For Testing/Production:
-  private baseUrl = 'https://niveseva.com/chant-counter';
+  private baseUrl = 'https://niveseva.com/chant-counter/api';
 
   constructor(private http: HttpClient) { }
 

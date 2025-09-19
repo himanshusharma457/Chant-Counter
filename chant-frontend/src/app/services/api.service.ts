@@ -35,7 +35,7 @@ export class ApiService {
   // private baseUrl = 'http://localhost:8080/api';
 
   // For Testing/Production:
-  private baseUrl = 'https://143.110.184.67:8080/chant-counter/api';
+  private baseUrl = 'http://143.110.184.67:8080/chant-counter/api';
 
   constructor(private http: HttpClient) { }
 

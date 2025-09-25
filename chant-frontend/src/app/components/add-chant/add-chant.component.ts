@@ -116,7 +116,7 @@ export class AddChantComponent implements OnInit {
       phoneControl?.setValidators([Validators.required, Validators.pattern(/^\d{10}$/)]);
       customUserIdControl?.clearValidators();
     } else {
-      customUserIdControl?.setValidators([Validators.required, Validators.minLength(8)]);
+      customUserIdControl?.setValidators([Validators.required, Validators.minLength(5)]);
       phoneControl?.clearValidators();
     }
 
@@ -157,7 +157,7 @@ export class AddChantComponent implements OnInit {
   getUsernameHint(): string {
     return this.userType === 'existing'
       ? 'Enter the username you previously created'
-      : 'Minimum 8 characters, letters and numbers allowed';
+      : 'Minimum 5 characters, letters and numbers allowed';
   }
 
   checkUsernameStats(): void {
@@ -212,11 +212,16 @@ export class AddChantComponent implements OnInit {
     }
   }
 
+  // Flag to control confirmation message visibility
+  showConfirmation = false;
+  confirmationMessage = '';
+
   private addChant(userId: string, request: any): void {
     this.apiService.addChant(request).subscribe({
       next: (response: ApiResponse) => {
         if (response.success) {
-          this.showMessage('Chant count added successfully!', 'success');
+          this.confirmationMessage = 'Chant count added successfully!';
+          this.showConfirmation = true;
           this.loadUserStats(userId);
           this.loadTotalStats();
           this.chantForm.patchValue({ count: '', date: '' });
@@ -263,10 +268,10 @@ export class AddChantComponent implements OnInit {
           this.apiService.addChant(chantRequest).subscribe({
             next: (chantResponse: ApiResponse) => {
               if (chantResponse.success) {
-                const successMessage = this.mode === 'username' 
+                this.confirmationMessage = this.mode === 'username' 
                   ? 'Username created and chant count added successfully!' 
                   : 'User created and chant count added successfully!';
-                this.showMessage(successMessage, 'success');
+                this.showConfirmation = true;
                 this.loadUserStats(userId);
                 this.loadTotalStats();
                 this.chantForm.patchValue({ count: '', date: '' });

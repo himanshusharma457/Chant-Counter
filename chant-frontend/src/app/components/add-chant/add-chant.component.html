@@ -1,4 +1,19 @@
-<div class="add-chant-container">
+<div class="add-chant-container" [class.blur-background]="showConfirmation">
+  <!-- Confirmation Message Popup -->
+  <div *ngIf="showConfirmation" class="confirmation-popup" [@fadeIn]>
+    <div class="confirmation-content">
+      <button mat-icon-button class="close-button" (click)="showConfirmation = false">
+        <mat-icon>close</mat-icon>
+      </button>
+      <div class="success-icon-container">
+        <svg class="nike-checkmark" viewBox="0 0 24 24" width="64" height="64">
+          <path d="M9,16.17L4.83,12l-1.42,1.41L9,19 21,7l-1.41-1.41L9,16.17z" fill="#4CAF50"/>
+        </svg>
+      </div>
+      <h2 class="confirmation-title">Success!</h2>
+      <p class="confirmation-message">{{ confirmationMessage }}</p>
+    </div>
+  </div>
   <!-- Professional Header -->
   <!-- <div class="hero-section">
     <div class="hero-content">
@@ -100,7 +115,7 @@
                 User ID is required
               </mat-error>
               <mat-error *ngIf="chantForm.get('customUserId')?.hasError('minlength')">
-                User ID must be at least 8 characters long
+                User ID must be at least 5 characters long
               </mat-error>
             </mat-form-field>
             

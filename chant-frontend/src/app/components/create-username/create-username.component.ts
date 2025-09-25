@@ -40,7 +40,7 @@ export class CreateUsernameComponent implements OnInit {
     this.usernameForm = this.fb.group({
       username: ['', [
         Validators.required,
-        Validators.minLength(8),
+        Validators.minLength(5),
         Validators.pattern(/^[A-Za-z0-9]+$/)
       ]],
       confirmUsername: ['', [Validators.required]]

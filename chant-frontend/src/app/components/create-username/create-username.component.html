@@ -29,12 +29,12 @@
                      formControlName="username" 
                      placeholder="Enter your username"
                      autocomplete="off">
-              <mat-hint>Minimum 8 characters, letters and numbers only</mat-hint>
+              <mat-hint>Minimum 5 characters, letters and numbers only</mat-hint>
               <mat-error *ngIf="usernameForm.get('username')?.hasError('required')">
                 Username is required
               </mat-error>
               <mat-error *ngIf="usernameForm.get('username')?.hasError('minlength')">
-                Username must be at least 8 characters long
+                Username must be at least 5 characters long
               </mat-error>
               <mat-error *ngIf="usernameForm.get('username')?.hasError('pattern')">
                 Username can only contain letters and numbers
